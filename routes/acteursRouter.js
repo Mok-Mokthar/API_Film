@@ -13,8 +13,21 @@ router.get("/:acteurId", (req, res) => {
 router.post("/", (req, res) => {
   sequelize.models.acteur
     .create(req.body)
-    .then((acteur) => res.status(201).json(acteur));
+    .then(acteurCree => {res.status(201).json(acteurCree)
+    });
 });
+
+//si marche pas /films:filmId doit être /film/filmId
+router.post('/films/:filmId', (req, res) => {
+  sequelize.models.acteur.create(req.body)
+      .then(acteurCreated => {
+          sequelize.models.acteurs_tags.create({
+              filmId: req.params.filmId,
+              acteurId: acteurCreated.id
+          })
+          res.status(201).json(acteurCreated);
+      })
+})
 
 router.delete("/:acteurId", (req, res) => {
   sequelize.models.acteur
@@ -24,9 +37,12 @@ router.delete("/:acteurId", (req, res) => {
     .then(res.json({ msg: "acteur supp" }));
 });
 
-router.patch("/:acteurId", (req, res) => {
-  sequelize.models.acteur
-    .update(req.body, { where: { id: req.params.acteurId } })
-    .then((acteur) => res.status(200).json(acteur));
-});
+router.patch('/:acteurId', (req, res) => {
+  sequelize.models.film.update(req.body,
+      {where: {id : req.params.acteurId} })
+      .then(nbRowsUpdated => {
+          res.json(nbRowsUpdated);
+      })
+})
+
 module.exports = router;

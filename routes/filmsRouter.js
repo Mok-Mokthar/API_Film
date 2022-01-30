@@ -13,7 +13,9 @@ router.get("/:filmId", (req, res) => {
 router.post("/", (req, res) => {
   sequelize.models.film
     .create(req.body)
-    .then((film) => res.status(201).json(film));
+      .then(filmCree => {
+        res.status(201).json(filmCree);
+      })
 });
 
 router.delete("/:filmId", (req, res) => {
@@ -26,7 +28,10 @@ router.delete("/:filmId", (req, res) => {
 
 router.patch("/:filmId", (req, res) => {
   sequelize.models.film
-    .update(req.body, { where: { id: req.params.filmId } })
-    .then((film) => res.status(200).json(film));
+    .update(req.body, 
+      { where: { id: req.params.filmId } })
+    .then(nbRowsUpdated => { res.status(200).json(nbRowsUpdated)
+    });
 });
+
 module.exports = router;

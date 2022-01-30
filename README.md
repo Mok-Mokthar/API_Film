@@ -40,8 +40,8 @@ delete avis by id : http://localhost/avis/:avisId
 pseudo request
 ```bash
 get all pseudos : http://localhost/pseudos
-get pseudo by id : http://localhost/pseudos/:pseudosiD
+get pseudo by id : http://localhost/pseudos/:pseudosId
 post pseudo : http://localhost/pseudos
-patch pseudo by id : http://localhost/pseudos/:pseudosiD
-delete pseudo by id : http://localhost/pseudos/:pseudosiD
+patch pseudo by id : http://localhost/pseudos/:pseudosId
+delete pseudo by id : http://localhost/pseudos/:pseudosId
 ```
